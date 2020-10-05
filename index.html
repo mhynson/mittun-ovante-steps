@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steps Demo</title>
+
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <header id="page-header" class="primary-bg-color">
+        
+    </header>
+    <main id="content">
+        <header class="primary-bg-color">
+            <h1>Get Out of Debt</h1>
+            <h2>Step 1</h2>
+            <h3>List your Existing Debts from Smallest to Largest</h3>
+        </header>
+        <div id="step-tracker" class="step-tracker">
+        </div>
+    </main>
+    <template id="step-template">
+        <div class="step" data-step-number="{{ step }}">
+            <div class="step__title">{{ title }}</div>
+            <div class="step__icon"></div>
+        </div>
+    </template>
+    <script src="./scripts.js"></script>
+</body>
+</html>

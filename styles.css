@@ -1,0 +1,117 @@
+:root {
+    --step-size: 30px;    
+    --step-color: #9c620b;
+    --step-border: 2px;
+    --step-title-line-ht: 12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+.primary-bg-color {
+    background-color: #145e73;
+}
+
+#page-header {
+    background-color: #145e73;
+    min-height:100px;
+}
+
+.step-tracker {
+    background: lightblue;
+    margin: 36px;
+
+    font-size: 12px;
+    font-family: sans-serif;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+}
+
+.step-tracker .step {
+    flex: 1 1 calc(var(--step-size) * 3);
+    position: relative;
+    overflow: hidden;
+    /* transition: all 1s */
+}
+
+.step-tracker .step__title {
+    color: #5f9bdf;
+    text-align: center;
+    line-height: var(--step-title-line-ht);
+    /* width: var(--step-size); */
+}
+
+/* .step-tracker .step__detail {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+} */
+
+.step-tracker .step:last-of-type .step__detail .step__leg {
+    display: none;
+}
+
+.step-tracker .step__icon {
+    position: relative;
+    color: var(--step-color);
+    border: var(--step-border) solid var(--step-color);
+    width: var(--step-size);
+    height: var(--step-size);
+    border-radius: var(--step-size);
+    margin: 0 auto;
+    background-color: white;
+    z-index: 2;
+}
+
+.step-tracker .step:not(.row-start) .step__icon:before,
+.step-tracker .step:not(.row-end) .step__icon:before,
+.step-tracker .step:not(.row-start) .step__icon:after,
+.step-tracker .step:not(.row-end) .step__icon:after {
+    position: absolute;
+    content: " ";
+    display: block;
+    z-index: 1;
+    width: 1000%;
+    height: 2px;
+    background-color: var(--step-color);
+    top: calc(50% + var(--step-title-line-ht) / 2);
+    top: calc(50% - 2px);
+    left: calc(var(--step-size) + var(--step-border));
+}
+
+.step-tracker .step:not(.row-start) .step__icon:before {
+    left: calc(-1 * var(--step-size) * 10);    
+}
+
+.step-tracker .step.row-start .step__icon:before {
+    display: none;
+}
+
+.step-tracker .step.row-end .step__icon:after {
+    display: none;
+} 
+
+#content header {
+    background-image: url(https://ci-25-ovante.pantheonsite.io/wp-content/themes/ovante-child/assets/images/big-o.svg);
+    background-repeat: no-repeat;
+    background-position: 93% 18%;
+    background-size: 100px;
+
+    display: none;
+}
+
+@media screen and (min-width: 769px) {
+    .step-tracker {
+        padding: 60px;
+    }
+}
