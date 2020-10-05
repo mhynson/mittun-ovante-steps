@@ -1,5 +1,5 @@
 :root {
-    --step-size: 16px;    
+    --step-size: 32px;  
     --step-color: #f9dd65;
     --step-border: 2px;
     --step-icon-text-color: #f68f38;
@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6 {
 /** Step Tracker */
 /* Baseline Styles */
 .step-tracker {
-    margin: 16px;
+    margin: 16px auto;
 
     font-size: 12px;
     font-family: sans-serif;
@@ -44,6 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 
     justify-content: space-between;
 
+    min-width: 280px;
     max-width: 960px;
 }
 
@@ -120,8 +121,13 @@ h1, h2, h3, h4, h5, h6 {
 
 @media screen and (min-width: 769px) {
     .step-tracker {
-        margin: 36px;
+        margin: 36px auto;
     }
+
+    /* .step-tracker .step__icon {
+        width: var(--step-size) * 2;
+        height: var(--step-size) * 2;
+    } */
 }
 
 @keyframes floatUp {
