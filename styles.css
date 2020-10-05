@@ -1,8 +1,11 @@
 :root {
-    --step-size: 30px;    
-    --step-color: #9c620b;
+    --step-size: 16px;    
+    --step-color: #f9dd65;
     --step-border: 2px;
-    --step-title-line-ht: 12px;
+    --step-icon-text-color: #f68f38;
+    --step-active-title-color: #f68f38;
+    --step-title-color: #5f9bdf;
+    --step-title-line-ht: 24px;
 }
 
 body {
@@ -24,9 +27,14 @@ h1, h2, h3, h4, h5, h6 {
     min-height:100px;
 }
 
+#content header {
+    display: none;
+}
+
+/** Step Tracker */
+/* Baseline Styles */
 .step-tracker {
-    background: lightblue;
-    margin: 36px;
+    margin: 16px;
 
     font-size: 12px;
     font-family: sans-serif;
@@ -35,35 +43,25 @@ h1, h2, h3, h4, h5, h6 {
     flex-wrap: wrap;
 
     justify-content: space-between;
+
+    max-width: 960px;
 }
 
 .step-tracker .step {
     flex: 1 1 calc(var(--step-size) * 3);
     position: relative;
     overflow: hidden;
-    /* transition: all 1s */
 }
 
 .step-tracker .step__title {
-    color: #5f9bdf;
+    color: var(--step-title-color);
     text-align: center;
     line-height: var(--step-title-line-ht);
-    /* width: var(--step-size); */
-}
-
-/* .step-tracker .step__detail {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-} */
-
-.step-tracker .step:last-of-type .step__detail .step__leg {
-    display: none;
 }
 
 .step-tracker .step__icon {
     position: relative;
-    color: var(--step-color);
+    color: var(--step-icon-text-color);
     border: var(--step-border) solid var(--step-color);
     width: var(--step-size);
     height: var(--step-size);
@@ -71,12 +69,14 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
     background-color: white;
     z-index: 2;
+    line-height: var(--step-size);
+    text-align: center;
+    transition: all 500ms;
 }
 
-.step-tracker .step:not(.row-start) .step__icon:before,
-.step-tracker .step:not(.row-end) .step__icon:before,
-.step-tracker .step:not(.row-start) .step__icon:after,
-.step-tracker .step:not(.row-end) .step__icon:after {
+/* Connectors */
+.step-tracker .step .step__icon:before,
+.step-tracker .step .step__icon:after {
     position: absolute;
     content: " ";
     display: block;
@@ -84,34 +84,47 @@ h1, h2, h3, h4, h5, h6 {
     width: 1000%;
     height: 2px;
     background-color: var(--step-color);
-    top: calc(50% + var(--step-title-line-ht) / 2);
     top: calc(50% - 2px);
-    left: calc(var(--step-size) + var(--step-border));
+    left: calc(var(--step-size));
+}
+
+.step-tracker .step.row-end .step__icon:after,
+.step-tracker .step.row-start.row-end .step__icon:before,
+.step-tracker .step.row-start.row-end .step__icon:after {
+    display: none;
 }
 
 .step-tracker .step:not(.row-start) .step__icon:before {
-    left: calc(-1 * var(--step-size) * 10);    
+    left: calc(-1 * var(--step-size) * 10);
 }
 
-.step-tracker .step.row-start .step__icon:before {
-    display: none;
+/* Hover State */
+.step-tracker .step:hover .step__icon {
+    cursor: pointer;
+    background-color: var(--step-color);
 }
 
-.step-tracker .step.row-end .step__icon:after {
-    display: none;
-} 
+/* Completed State */
+.step-tracker .step.complete .step__icon {
+    background-color: var(--step-color);
+}
 
-#content header {
-    background-image: url(https://ci-25-ovante.pantheonsite.io/wp-content/themes/ovante-child/assets/images/big-o.svg);
-    background-repeat: no-repeat;
-    background-position: 93% 18%;
-    background-size: 100px;
+.step-tracker .step.active .step__title {
+    color: var(--step-active-title-color);
+}
 
-    display: none;
+/* Active State */
+.step-tracker .step.active .step__title {
+    color: var(--step-active-title-color);
 }
 
 @media screen and (min-width: 769px) {
     .step-tracker {
-        padding: 60px;
+        margin: 36px;
     }
+}
+
+@keyframes floatUp {
+    from { transform: translateY(8px); }
+    to { transform: translateY(0); }
 }

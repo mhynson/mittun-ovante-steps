@@ -3,21 +3,36 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-const tracker = $('#step-tracker');
-const template = $('#step-template');
+const extraClass = (step, activeStep) => {
+    let classList = [];
+    if (step === activeStep) classList.push('active');
+    if (step < activeStep) classList.push('complete');
+    return ' ' + classList.join(' ');
+};
 
-const qp = new URLSearchParams(location.search);
-const steps = parseInt((qp.get('steps') || '3'), 10);
+/**
+ * renderStepsFromQueryParameter - renders the number of steps based on query parameters
+ */
+const renderStepsFromQueryParameter = () => {
+    const tracker = $('#step-tracker');
+    const template = $('#step-template');
 
-let step = 0;
-while(step < steps) {
-    let title = `Step ${step}`;
-    let mashup = template.innerHTML.replace('{{ title }}', title);
-    mashup = mashup.replace('{{ step }}', step);
-    tracker.innerHTML += mashup;
-    mashup = '';
-    step++;
-}
+    const qp = new URLSearchParams(location.search);
+    const steps = parseInt((qp.get('steps') || '3'), 10);
+    const activeStep = parseInt((qp.get('active') || '1'), 10)
+    let step = 1;
+    while(step <= steps) {
+        let title = `Step ${step}`;
+        let mashup = template.innerHTML.replace('{{ title }}', title);
+        mashup = mashup.replace('{{ step }}', step);
+        mashup = mashup.replace('{{ extra_class }}', extraClass(step, activeStep));
+        tracker.innerHTML += mashup;
+        mashup = '';
+        step++;
+    }
+
+    updateStepConnectors();
+};
 
 /**
  * updateStepConnectors - html class management for displaying step connectors
@@ -46,6 +61,6 @@ const updateStepConnectors = () => {
         }
     });
 };
-//
-//  window.addEventListener('load',  updateStepConnectors);
-// window.addEventListener('resize',  updateStepConnectors);
+
+window.addEventListener('load',  renderStepsFromQueryParameter);
+window.addEventListener('resize',  updateStepConnectors);

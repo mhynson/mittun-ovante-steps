@@ -21,9 +21,9 @@
         </div>
     </main>
     <template id="step-template">
-        <div class="step" data-step-number="{{ step }}">
+        <div class="step{{ extra_class }}" data-step-number="{{ step }}">
             <div class="step__title">{{ title }}</div>
-            <div class="step__icon"></div>
+            <div class="step__icon">$</div>
         </div>
     </template>
     <script src="./scripts.js"></script>
