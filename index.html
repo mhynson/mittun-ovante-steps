@@ -19,6 +19,21 @@
         </header>
         <div id="step-tracker" class="step-tracker">
         </div>
+
+        <div id="controls">
+            <h2>For demo only:</h2>
+            
+            <h3>Change number of steps</h3>
+            <select id="step-changer">
+            </select>
+
+            <h3>Set active step</h3>
+            <select id="active-step-changer">
+            </select>
+
+            <br />
+            <button id="update-btn">Update Demo</button>
+        </div>
     </main>
     <template id="step-template">
         <div class="step{{ extra_class }}" data-step-number="{{ step }}">

@@ -122,6 +122,23 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--step-active-title-color);
 }
 
+/* Demo Controls */
+#controls {
+    border-top: 1px dashed #9f9f9f;
+    min-width: 280px;
+    max-width: 960px;
+    margin: 180px auto 0;
+    text-align: center;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+#controls > * {
+    font-weight: 100;
+    margin: 8px 0;
+}
+
 @media screen and (min-width: 769px) {
     .step-tracker {
         margin: 36px auto;

@@ -10,16 +10,60 @@ const extraClass = (step, activeStep) => {
     return ' ' + classList.join(' ');
 };
 
+const qp = new URLSearchParams(location.search);
+let steps = parseInt((qp.get('steps') || '3'), 10);
+let activeStep = parseInt((qp.get('active') || '1'), 10)
+
+let newUrl = location.href;
+
+const renderStepsSelectBox = () => {
+    let step = 3;
+    while( step <= 15 ) {
+        $('#step-changer').innerHTML += `
+            <option value="${step}">${step}</option>
+        `;
+        step++;
+    }
+};
+
+const renderActiveStepsSelectBox = () => {
+    let step = 1;
+    $('#active-step-changer').innerHTML = '';
+    while( step <= steps ) {
+        $('#active-step-changer').innerHTML += `
+            <option value="${step}">${step}</option>
+        `;
+        step++;
+    }
+};
+
+const demoBehaviors = () => {
+    // Button listener
+    $('#update-btn').addEventListener('click', evt => {
+        steps = parseInt(($('#step-changer').value || 3), 10);
+        activeStep = parseInt(($('#active-step-changer').value || 1), 10);
+        renderSteps();
+        renderActiveStepsSelectBox();
+    });
+
+};
+
+const renderDemo = () => {
+    renderStepsSelectBox();
+    renderActiveStepsSelectBox();
+    demoBehaviors();
+    renderSteps();
+};
+
 /**
- * renderStepsFromQueryParameter - renders the number of steps based on query parameters
+ * renderSteps - renders the number of steps
  */
-const renderStepsFromQueryParameter = () => {
+const renderSteps = () => {
     const tracker = $('#step-tracker');
     const template = $('#step-template');
 
-    const qp = new URLSearchParams(location.search);
-    const steps = parseInt((qp.get('steps') || '3'), 10);
-    const activeStep = parseInt((qp.get('active') || '1'), 10)
+    tracker.innerHTML = '';
+
     let step = 1;
     while(step <= steps) {
         let title = `Step ${step}`;
@@ -62,5 +106,5 @@ const updateStepConnectors = () => {
     });
 };
 
-window.addEventListener('load',  renderStepsFromQueryParameter);
+window.addEventListener('load',  renderDemo);
 window.addEventListener('resize',  updateStepConnectors);
