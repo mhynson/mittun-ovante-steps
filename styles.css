@@ -1,11 +1,11 @@
 :root {
-    --step-size: 32px;  
+    --step-size: 44px;  
     --step-color: #f9dd65;
     --step-border: 2px;
     --step-icon-text-color: #f68f38;
     --step-active-title-color: #f68f38;
     --step-title-color: #5f9bdf;
-    --step-title-line-ht: 24px;
+    --step-title-line-ht: 24px;    
 }
 
 body {
@@ -52,6 +52,8 @@ h1, h2, h3, h4, h5, h6 {
     flex: 1 1 calc(var(--step-size) * 3);
     position: relative;
     overflow: hidden;
+
+    animation: slideIn 500ms;
 }
 
 .step-tracker .step__title {
@@ -71,6 +73,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: white;
     z-index: 2;
     line-height: var(--step-size);
+    font-size: 24px;
     text-align: center;
     transition: all 500ms;
 }
@@ -130,7 +133,13 @@ h1, h2, h3, h4, h5, h6 {
     } */
 }
 
-@keyframes floatUp {
-    from { transform: translateY(8px); }
-    to { transform: translateY(0); }
-}
+@keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
